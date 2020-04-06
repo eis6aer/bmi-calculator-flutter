@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:bmi_calculator/common/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'BMICard.dart';
+import 'common/Constants.dart';
 import 'common/SimpleCardDetail.dart';
 
 class InputPage extends StatefulWidget {
@@ -13,6 +16,7 @@ class _InputPageState extends State<InputPage> {
 
   Gender selectedGender;
   double height = 180;
+  int weight = 90;
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +120,41 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: BMICard(
                       color: kDefaultCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'WEIGHT',
+                            style: labelTextStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kDataStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              FloatingActionButton(
+                                backgroundColor: Color(0xFF4C4F5E),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                )
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              FloatingActionButton(
+                                  backgroundColor: Color(0xFF4C4F5E),
+                                  child: Icon(
+                                      Icons.remove,
+                                    color: Colors.white,
+                                  )
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -127,11 +166,27 @@ class _InputPageState extends State<InputPage> {
             Container(
               color: kBottomContainerColor,
               margin: EdgeInsets.only(top: 10.0),
+              child: Center(
+                child: Text(
+                  'CALCULATE YOUR BMI',
+                  style: labelTextStyle.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900
+                  ),
+                ),
+              ),
               width: double.infinity,
               height: kBottomContainerHeight
             )
           ],
         )
     );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton();
   }
 }
