@@ -2,6 +2,8 @@ import 'dart:ffi';
 
 import 'package:bmi_calculator/common/Constants.dart';
 import 'package:bmi_calculator/common/round_button.dart';
+import 'package:bmi_calculator/main.dart';
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'BMICard.dart';
@@ -209,12 +211,20 @@ class _InputPageState extends State<InputPage> {
             Container(
               color: kBottomContainerColor,
               margin: EdgeInsets.only(top: 10.0),
-              child: Center(
-                child: Text(
-                  'CALCULATE YOUR BMI',
-                  style: labelTextStyle.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                      context,
+                      resultsRoute
+                  );
+                },
+                child: Center(  
+                  child: Text(
+                    'CALCULATE YOUR BMI',
+                    style: labelTextStyle.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900
+                    ),
                   ),
                 ),
               ),
