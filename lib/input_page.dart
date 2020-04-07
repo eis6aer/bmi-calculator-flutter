@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:bmi_calculator/common/Constants.dart';
+import 'package:bmi_calculator/common/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'BMICard.dart';
@@ -17,6 +18,7 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   double height = 180;
   int weight = 90;
+  int age = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -134,22 +136,24 @@ class _InputPageState extends State<InputPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              FloatingActionButton(
-                                backgroundColor: Color(0xFF4C4F5E),
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                )
+                              RoundMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                                child: Icon(FontAwesomeIcons.minus),
                               ),
                               SizedBox(
                                 width: 10.0,
                               ),
-                              FloatingActionButton(
-                                  backgroundColor: Color(0xFF4C4F5E),
-                                  child: Icon(
-                                      Icons.remove,
-                                    color: Colors.white,
-                                  )
+                              RoundMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                                child: Icon(FontAwesomeIcons.plus),
                               )
                             ],
                           )
@@ -158,7 +162,46 @@ class _InputPageState extends State<InputPage> {
                     ),
                   ),
                   Expanded(
-                    child: BMICard(color: kDefaultCardColor,),
+                    child: BMICard(
+                      color: kDefaultCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'AGE',
+                            style: labelTextStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kDataStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                                child: Icon(FontAwesomeIcons.minus),
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                                child: Icon(FontAwesomeIcons.plus),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -181,12 +224,5 @@ class _InputPageState extends State<InputPage> {
           ],
         )
     );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton();
   }
 }
