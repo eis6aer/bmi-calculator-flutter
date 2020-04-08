@@ -4,7 +4,7 @@ class BMICard extends StatelessWidget {
 
   final Color color;
   final Widget cardChild;
-  Function action;
+  final Function action;
 
   BMICard({@required this.color, this.cardChild, this.action});
 

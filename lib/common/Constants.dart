@@ -20,7 +20,13 @@ const kSubDataStyle = TextStyle(
 
 enum Gender {MALE, FEMALE}
 
-const labelTextStyle = TextStyle(
+const kLabelTextStyle = TextStyle(
     fontSize: 18.0,
     color: Color(0xFF8D8E98)
+);
+
+const kLargeButtonTextStyle = TextStyle(
+    fontSize: 25.0,
+    color: Colors.white,
+    fontWeight: FontWeight.w900
 );

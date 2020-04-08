@@ -1,14 +1,13 @@
-import 'dart:ffi';
-
 import 'package:bmi_calculator/common/Constants.dart';
-import 'package:bmi_calculator/common/round_button.dart';
+import 'package:bmi_calculator/components/round_button.dart';
 import 'package:bmi_calculator/main.dart';
-import 'package:bmi_calculator/results_page.dart';
+import 'package:bmi_calculator/screens/calculate_usecase.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'BMICard.dart';
-import 'common/Constants.dart';
-import 'common/SimpleCardDetail.dart';
+import '../components/bmi_card.dart';
+import '../common/Constants.dart';
+import '../components/SimpleCardDetail.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -73,7 +72,7 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Text(
                       'HEIGHT',
-                      style: labelTextStyle,
+                      style: kLabelTextStyle,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +128,7 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text(
                             'WEIGHT',
-                            style: labelTextStyle,
+                            style: kLabelTextStyle,
                           ),
                           Text(
                             weight.toString(),
@@ -171,7 +170,7 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text(
                             'AGE',
-                            style: labelTextStyle,
+                            style: kLabelTextStyle,
                           ),
                           Text(
                             age.toString(),
@@ -213,18 +212,23 @@ class _InputPageState extends State<InputPage> {
               margin: EdgeInsets.only(top: 10.0),
               child: FlatButton(
                 onPressed: () {
+                  CalculateBMI usecase = CalculateBMI();
+                  double bmi = usecase.invoke(height, weight.toDouble());
+
                   Navigator.pushNamed(
-                      context,
-                      resultsRoute
+                    context,
+                    resultsRoute,
+                    arguments: ResultsArguments(
+                      bmi,
+                      usecase.getResult(bmi),
+                      usecase.getInterpretation(bmi)
+                    ),
                   );
                 },
-                child: Center(  
+                child: Center(
                   child: Text(
-                    'CALCULATE YOUR BMI',
-                    style: labelTextStyle.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900
-                    ),
+                    'CALCULATE',
+                    style: kLargeButtonTextStyle,
                   ),
                 ),
               ),
